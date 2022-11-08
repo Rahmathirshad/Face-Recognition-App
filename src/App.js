@@ -7,8 +7,8 @@ import Clarifai from 'clarifai'; // face detection API
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Signin from './components/Signin/Signin';
-import Registor from './components/Registor/Registor';
 import ImageURLInput from './components/ImageURLInput/ImageURLInput';
+import Registor from './components/Registor/Registor';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 
 
@@ -25,10 +25,25 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
-      route: 'signin'
+      route: 'signin',
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''}
     }
   }
 
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined
+    }})
+  }
 
   // --- Clarifai API (setting face location square box) ---
   calculateFaceLocation = (data) => {
@@ -58,17 +73,17 @@ class App extends Component {
     //--- Clarifai API (Predict/Response face detect model by reading through url) ---
     app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then(response => {
-        if (response) {
+        if(response){
           fetch('http://localhost:3000/image', {
             method: 'put',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               id: this.state.user.id
             })
           })
-            .then(response => response.json())
+          .then(response => response.json())
             .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count }))
+              this.setState(Object.assign(this.state.user, { entries: count}))
             })
 
         }
@@ -87,8 +102,8 @@ class App extends Component {
       <div className='App tc'>
         <ParticlesBg type="cobweb" bg={true} />
         <ToastContainer
-          position='top-center' autoClose={2000} hideProgressBar={false} newestOnTop={false}
-          closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover
+        position='top-center' autoClose={2000} hideProgressBar={false} newestOnTop={false}
+        closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover
         />
         <div>
           <Logo />

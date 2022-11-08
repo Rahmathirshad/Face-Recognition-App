@@ -2,7 +2,7 @@
   "name": "facerecognitionbrain",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rahmathirshad.github.io/Face-Recognition-App",
+  "homepage": "http://rahmathirshad.github.io/Face-Recognition-App",
   "dependencies": {
     "clarifai": "^2.9.1",
     "gh-pages": "^4.0.0",
