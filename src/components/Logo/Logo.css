@@ -1,0 +1,9 @@
+.Tilt{
+  height: 150px;
+  width: 150px;
+  background-image: linear-gradient(to right, rgba(5, 243, 255, 0.16), hsla(138, 100%, 50%, 0.226));
+}
+
+.logo{
+  width: min-content;
+}
